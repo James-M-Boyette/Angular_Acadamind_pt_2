@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-success">New recipe</button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        <a 
+        href="#" 
+        class="list-group-item clearfix" 
+        *ngFor="let recipe of recipes">
+            <div class="pull-left">
+                <h4 class="list-group-item-heading">{{recipe.name}}</h4>
+                <p class="list-group-item-text">{{recipe.description}}</p>
+            </div>
+            <span class="pull-right">
+                <!-- 
+                Re: 'src', these are two ways to handle data-binding 
+                
+                1st: string interpolation (with the vanilla HTML attribute).
+                2nd: property-binding.
+
+                I spent an hour trying to figure out what the difference was. At best, ChatGPT told me that the first (string interp) "sets the *attribute* initially", and the second (property binding) "updates the *property* to a current state" 
+                
+                ... when I tried to get a disambiguation between property and attribute, I hit a wall. 
+                
+                So, for all intents and purposes, these do the same thing in this case, and the latter, when combined with `(ngModel)` (which would be `[(ngModel)]`) allows for two-way data binding. 
+                 -->
+                <img 
+                src="{{recipe.imagePath}}" 
+                [src]="recipe.imagePath"
+                alt="{{recipe.name}}" 
+                class="img-responsive" 
+                style="max-height: 50px;">
+                <!-- This button was my attempt at figuring out whether string interpolation wasn't dynamic ... it may not be in some case(s) but in this one, it is ... -->
+                <!-- <button class="button btn-primary" (click)="onClickToUpdatePhoto()">Change Pic</button> -->
+            </span>
+        </a>
+        <app-recipe-item>Loading recipe item ...</app-recipe-item>
+    </div>
+</div>
