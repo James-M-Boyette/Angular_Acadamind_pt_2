@@ -1,8 +1,22 @@
 <div class="row">
     <div class="col-md-5">
-        <app-recipe-list>Loading recipe list ...</app-recipe-list>
+        <app-recipe-list (recipeWasSelected)="selectedRecipe = $event">Loading a list of recipes ...</app-recipe-list>
     </div>
     <div class="col-md-7">
-        <app-recipe-detail>Loading recipe detail ...</app-recipe-detail>
+        <app-recipe-detail  *ngIf="selectedRecipe; else infoText"
+        [recipe]="selectedRecipe"
+        >
+        </app-recipe-detail>
+        <ng-template #infoText>
+            <p>Please select a recipe!</p>
+        </ng-template>
     </div>
 </div>
+
+<!-- 
+    What's happening here?
+    1. This `recipes` component is the most top-level of the child components for our 'app'. It is one of the "features" of our app. In other words, our 'app' has several "lietenants": the "header", the "recipe", and the "shopping list" features/components. Together, these components make-up our app.
+    2. In this top-level file of the "recipes" feature, we are pointing to two sub-features: a list of our recipes, and details about a given/selected recipe
+    3. In our "recipe list" sub-feature, we have a list of recipes stored in that top-most component (recipe-list.component.ts), and template logic (in our recipe-list.component.html) that uses a 'for' loop to show each element in that list by passing the element's data to recipe-item.component.html/.ts and then rendering it. The decision to "show app-recipe-item for each 'el' in our list" occurs at the `recipe-list` level, and decisions on what is actually displayed occur in its child (recipe-item)
+    4. 
+-->

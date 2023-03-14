@@ -6,7 +6,7 @@
 <hr>
 <div class="row">
     <div class="col-md-12">
-        <a 
+        <!-- <a 
         href="#" 
         class="list-group-item clearfix" 
         *ngFor="let recipe of recipes">
@@ -15,9 +15,20 @@
                 <p class="list-group-item-text">{{recipe.description}}</p>
             </div>
             <span class="pull-right">
-                <!-- 
-                Re: 'src', these are two ways to handle data-binding 
+
+                <img 
+                    src="{{recipe.imagePath}}" 
+                    [src]="recipe.imagePath"
+                    alt="{{recipe.name}}" 
+                    class="img-responsive" 
+                    style="max-height: 50px;">
+                </span>
+            </a> -->
+
+            <!-- Re: the 'src' property above ... 
                 
+                I've included two ways to handle data-binding -
+
                 1st: string interpolation (with the vanilla HTML attribute).
                 2nd: property-binding.
 
@@ -26,17 +37,11 @@
                 ... when I tried to get a disambiguation between property and attribute, I hit a wall. 
                 
                 So, for all intents and purposes, these do the same thing in this case, and the latter, when combined with `(ngModel)` (which would be `[(ngModel)]`) allows for two-way data binding. 
-                 -->
-                <img 
-                src="{{recipe.imagePath}}" 
-                [src]="recipe.imagePath"
-                alt="{{recipe.name}}" 
-                class="img-responsive" 
-                style="max-height: 50px;">
-                <!-- This button was my attempt at figuring out whether string interpolation wasn't dynamic ... it may not be in some case(s) but in this one, it is ... -->
-                <!-- <button class="button btn-primary" (click)="onClickToUpdatePhoto()">Change Pic</button> -->
-            </span>
-        </a>
-        <app-recipe-item>Loading recipe item ...</app-recipe-item>
+            -->
+
+        <!-- 
+            By Section #6, we moved the above code to the child component `recipe-item.component.html` (in order to demonstrate the flow of data)
+        -->
+        <app-recipe-item *ngFor="let recipe of recipes" [theRecipe]="recipe" (recipeSelected)="onRecipeSelected(recipe)">Loading recipe item ...</app-recipe-item>
     </div>
 </div>

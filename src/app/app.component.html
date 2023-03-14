@@ -1,9 +1,13 @@
-<app-header>Loading Header ...</app-header>
+<app-header (featureSelected)="onNavigate($event)">Loading Header ...</app-header>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <app-recipes>Loading recipes ...</app-recipes>
-      <app-shopping-list>Loading shopping list ...</app-shopping-list>
+    <div class="col-md-12" >
+      <app-recipes *ngIf="loadedFeature === 'recipe'">Loading recipes ...</app-recipes>
+      <app-shopping-list *ngIf="loadedFeature !== 'recipe'">Loading shopping list ...</app-shopping-list>
     </div>
   </div>
 </div>
+
+<!-- 
+  What do we need to do to get a selection from our header to (via ngIf) show either of the above componenets?
+ -->
